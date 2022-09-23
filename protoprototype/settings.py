@@ -30,7 +30,7 @@ if os.getenv('DEBUG', False):
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ['protoproto.herokuapp.com']
+ALLOWED_HOSTS = ['protoproto.herokuapp.com', 'protoprototype.herokuapp.com']
 
 
 # Application definition
