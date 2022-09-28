@@ -21,21 +21,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*)0q_69@8z+%d^0#950)2ugg6pt!4xrd1uhqwi!x*z8bxr89&h'
+SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-*)0q_69@8z+%d^0#950)2ugg6pt!4xrd1uhqwi!x*z8bxr89&h')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = 'RENDER' not in os.environ
 
-if os.getenv('DEBUG', False):
-    DEBUG = os.getenv('DEBUG') == 'TRUE'
-else:
-    DEBUG = True
-
-ALLOWED_HOSTS = ['protoproto.herokuapp.com', 'protoprototype.herokuapp.com']
-
+ALLOWED_HOSTS = []
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 
 INSTALLED_APPS = [
+    'administrator.apps.AdministratorConfig',
+    'betreiber.apps.BetreiberConfig',
     'myprototype.apps.MyprototypeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
