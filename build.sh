@@ -2,8 +2,6 @@
 # exit on error
 set -o errexit
 
-
-pip install setuptools
 poetry install
 
 python manage.py collectstatic --no-input
