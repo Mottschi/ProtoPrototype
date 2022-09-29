@@ -8,6 +8,7 @@ authors = ["Sebastian Mottschall <srophkor@gmail.com>"]
 python = "^3.10"
 Django = "^4.1.1"
 whitenoise = {extras = ["brotli"], version = "^6.2.0"}
+gunicorn = "^20.1.0"
 
 
 [build-system]
