@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "protoprototype"
+version = "0.1.0"
+description = "Proto Prototype fuer Projekt Bilderbuch"
+authors = ["Sebastian Mottschall <srophkor@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.1.1"
+whitenoise = {extras = ["brotli"], version = "^6.2.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

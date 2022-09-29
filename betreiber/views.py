@@ -3,4 +3,5 @@ from django.shortcuts import render
 
 # Create your views here.
 def index(request):
-	return HttpResponse("Betreiberseite")
+	return render(request, 'betreiber/index.html', {'empfaenger': 'Betreiber',
+													'title': 'Betreiberseite'})
