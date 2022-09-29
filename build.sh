@@ -2,13 +2,7 @@
 # exit on error
 set -o errexit
 
-poetry --version
-
-poetry update
-
-poetry --version
-
-poetry install
+pip install setuptools
 
 python manage.py collectstatic --no-input
 python manage.py migrate
