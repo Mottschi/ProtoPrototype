@@ -2,9 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
+    <title>Adminseite</title>
 </head>
 <body>
-    <h2>Hallo {{ empfaenger }}!</h2>
+    Adminseite
+
+    Neuen Benutzer erstellen:
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">Username:</label> <input type="text" name="username" id="username"/>
+        <label for="vorname">Vorname:</label> <input type="text" name="vorname" id="vorname"/>
+        <label for="nachname">Nachname:</label> <input type="text" name="nachname" id="nachname"/>
+        <input type="submit" value="Absenden"/>
+    </form>
 </body>
 </html>

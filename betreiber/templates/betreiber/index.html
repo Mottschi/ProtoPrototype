@@ -6,7 +6,26 @@
     <title>{{ title }}</title>
 </head>
 <body>
+    Beispiel Variablennutzung im Template:
     <h2>Hallo {{ empfaenger }}!</h2>
+    <br><br>
+
+    Beispiel Einbindung von static resources. Falls Static funktioniert, folgt ein Tetris Bild:
     <img src='{% static "betreiber/capture.png" %}' alt="Test pic">
+    <br><br>
+
+    Beispiel Template Funktionen:
+    <br>
+    Eingerichtete Konten:
+        {% if konten %}
+            <ul>
+            {% for konto in konten %}
+                <li>{{ konto.username}} ({{ konto.first_name}} {{konto.last_name}})</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            Noch keine Betreiberkonten eingerichtet
+        {% endif %}
+
 </body>
 </html>
