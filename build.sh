@@ -4,6 +4,7 @@ set -o errexit
 
 poetry install
 
+#necessary to fix issue caused by outdated poetry version on render.com:
 pip install setuptools
 
 python manage.py collectstatic --no-input
