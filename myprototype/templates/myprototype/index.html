@@ -1,10 +1,25 @@
-<!DOCTYPE html>
+{% load static %}
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='{% static "myprototype/voice recorder.js" %}'></script>
+  <title>MediaRecorder</title>
 </head>
+
 <body>
-    <h2>Hallo {{ empfaenger }}!</h2>
+    <h1>Endnutzerseite</h1>
+    <h2>MediaRecorder Learning</h2>
+
+    <audio>Ihr Browser unterstützt leider keine Audio-Elemente</audio>
+
+
+    <input id="record" type="button" value="Aufnehmen">
+    <input id="play" type="button" value="Abspielen" disabled>
+    <input id="stop" type="button" value="Stop" disabled>
+
 </body>
 </html>
