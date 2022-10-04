@@ -13,12 +13,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
   async function getAudio() {
     let stream = null;
 
-    const mimeType = "audio/ogg"
+    // const mimeType = "audio/ogg"
 
     const constraints = {
       audio: true,
       video: false,
-      mimeType: mimeType
+
     }
 
     try {
@@ -55,8 +55,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       recording = false;
       console.log("recording stopped")
 
-      console.log(mimeType)
-      const blob = new Blob(chunks, { type: mimeType });
+      //console.log(mimeType)
+      const blob = new Blob(chunks, {  });
       chunks = [];
       const audioURL= window.URL.createObjectURL(blob)
       console.log(audioURL)
