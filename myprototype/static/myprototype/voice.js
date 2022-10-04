@@ -28,7 +28,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
       return;
     }
 
-    let mediaRecorder = new MediaRecorder(stream);
+    const options = {
+      mimeType: 'audio/webm'
+    }
+
+    let mediaRecorder = new MediaRecorder(stream, options);
+    console.log(`options:`, options)
 
     mediaRecorder.addEventListener("dataavailable", handleDataAvailable);
     mediaRecorder.addEventListener("stop", onStop);
