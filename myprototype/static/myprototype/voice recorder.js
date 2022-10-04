@@ -1,21 +1,24 @@
 window.addEventListener('DOMContentLoaded', (event) => {
   let recording = false;
 
-  //const audio = new Audio();
   const audio = document.querySelector("audio")
 
   const recordBtn = document.querySelector('#record')
   const playBtn = document.querySelector('#play')
   const stopBtn = document.querySelector('#stop')
+  const downloadBtn = document.querySelector("#download")
 
  let chunks= [];
 
   async function getAudio() {
     let stream = null;
 
+    const mimeType = "audio/ogg"
+
     const constraints = {
       audio: true,
-      video: false
+      video: false,
+      mimeType: mimeType
     }
 
     try {
@@ -52,7 +55,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       recording = false;
       console.log("recording stopped")
 
-      const blob = new Blob(chunks, { type: "audio/ogg; codecs=opus" });
+      console.log(mimeType)
+      const blob = new Blob(chunks, { type: mimeType });
       chunks = [];
       const audioURL= window.URL.createObjectURL(blob)
       console.log(audioURL)
@@ -62,6 +66,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
       recordBtn.disabled = false;
       playBtn.disabled = false;
+      downloadBtn.disabled = false;
+
+      downloadBtn.addEventListener("click", download)
 
     }
 
@@ -74,6 +81,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
     function playBtnHandler() {
       console.log(audio)
       audio.play();
+    }
+
+    function download() {
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = audio.src;
+      a.download = "test.ogg";
+      a.click();
     }
   }
 
