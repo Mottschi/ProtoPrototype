@@ -1,6 +1,6 @@
-window.addEventListener('DOMContentLoaded', (event) => {
-  let recording = false;
+console.log('starting')
 
+window.addEventListener('DOMContentLoaded', (event) => {
   const audio = document.querySelector("audio")
 
   const recordBtn = document.querySelector('#record')
@@ -8,7 +8,41 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const stopBtn = document.querySelector('#stop')
   const downloadBtn = document.querySelector("#download")
 
- let chunks= [];
+  let chunks= [];
+  let mimeType = null;
+
+  const types = [
+      "audio/mp4",
+      "audio/wav",
+      "audio/ogg",
+      "audio/opus",
+      "audio/webm",
+      "audio/webm;codecs=opus",
+      "audio/mpeg",
+      "audio/3gpp"
+  ];
+
+  // Find first mimeType that is supported by the browser and set it as mimeType
+  mimeType = types.filter(MediaRecorder.isTypeSupported)[0];
+  console.log(`chosen mimeType: ${mimeType}`)
+
+  if (!mimeType) {
+    alert("Kein gueltiges Audioformat gefunden");
+    return;
+  }
+
+  const options = {
+      mimeType: mimeType
+    }
+
+  for (const type of types) {
+    console.log(`Is ${type} supported? ${MediaRecorder.isTypeSupported(type) ? "Maybe!" : "Nope :("}`);
+  }
+
+  console.log(`options:`, options)
+
+  recordBtn.addEventListener("click", getAudio)
+
 
   async function getAudio() {
     let stream = null;
@@ -18,19 +52,18 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const constraints = {
       audio: true,
       video: false,
-
+      mimeType: mimeType
     }
 
     try {
+
       stream = await navigator.mediaDevices.getUserMedia(constraints)
     } catch (error) {
+      console.log("Ein Fehler ist aufgetreten beim Versuch, getUserMedia auszuführen");
       console.log(error)
       return;
     }
 
-    const options = {
-      mimeType: 'audio/webm'
-    }
 
     let mediaRecorder = new MediaRecorder(stream, options);
     console.log(`options:`, options)
@@ -48,8 +81,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     mediaRecorder.start();
     console.log('recording started');
 
-    recording = true;
-
     function handleDataAvailable(data) {
       console.log(`data available: ${data.data}`)
       chunks.push(data.data)
@@ -57,11 +88,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function onStop() {
-      recording = false;
       console.log("recording stopped")
 
       //console.log(mimeType)
-      const blob = new Blob(chunks, {  });
+      const blob = new Blob(chunks);
       chunks = [];
       const audioURL= window.URL.createObjectURL(blob)
       console.log(audioURL)
@@ -97,10 +127,4 @@ window.addEventListener('DOMContentLoaded', (event) => {
       a.click();
     }
   }
-
-
-
-  recordBtn.addEventListener("click", getAudio)
-
-
 });
