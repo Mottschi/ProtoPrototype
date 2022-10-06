@@ -119,11 +119,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function download() {
+      suffix = mimeType.substring(mimeType.indexOf('/') + 1)
       var a = document.createElement("a");
       document.body.appendChild(a);
       a.style = "display: none";
       a.href = audio.src;
-      a.download = "test.ogg";
+      a.download = `recording.${suffix}`;
       a.click();
     }
   }
