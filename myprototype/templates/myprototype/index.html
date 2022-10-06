@@ -23,7 +23,11 @@
     <input id="download" type="button" value="Download" disabled>
 
     <div>
-        <audio controls>Ihr Browser unterstützt leider keine Audio-Elemente</audio>
+        <audio id="audioplayer" controls>Ihr Browser unterstützt leider keine Audio-Elemente</audio>
+    </div>
+
+    <div><h4>Testing Audio Element Playback</h4>
+        <audio src="{% static 'myprototype/testsong.mp3' %}" controls>Noch ein Audio Element</audio>
     </div>
 </body>
 </html>

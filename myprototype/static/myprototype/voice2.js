@@ -1,7 +1,7 @@
 console.log('starting')
 
 window.addEventListener('DOMContentLoaded', (event) => {
-  const audio = document.querySelector("audio")
+  const audio = document.querySelector("#audioplayer")
 
   const recordBtn = document.querySelector('#record')
   const playBtn = document.querySelector('#play')
@@ -12,19 +12,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
   let mimeType = null;
 
   const types = [
+      "audio/webm",
+      "audio/mpeg",
+      "audio/mp3",
       "audio/mp4",
       "audio/wav",
       "audio/ogg",
       "audio/opus",
-      "audio/webm",
       "audio/webm;codecs=opus",
       "audio/mpeg",
+      "audio/mpeg3",
       "audio/3gpp"
   ];
 
   // Find first mimeType that is supported by the browser and set it as mimeType
   mimeType = types.filter(MediaRecorder.isTypeSupported)[0];
   console.log(`chosen mimeType: ${mimeType}`)
+
 
   if (!mimeType) {
     alert("Kein gueltiges Audioformat gefunden");
@@ -96,6 +100,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       const audioURL= window.URL.createObjectURL(blob)
       console.log(audioURL)
       audio.src = audioURL;
+      audio.type = mimeType;
 
       playBtn.addEventListener("click", playBtnHandler)
 
@@ -119,6 +124,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     }
 
     function download() {
+      console.log(`Trying to download audio content. Audio.src: ${audio.src}`)
       suffix = mimeType.substring(mimeType.indexOf('/') + 1)
       var a = document.createElement("a");
       document.body.appendChild(a);
